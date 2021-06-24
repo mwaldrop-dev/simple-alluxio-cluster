@@ -20,7 +20,22 @@ The launchCluster.sh script needs a few things to be in place in order to functi
 <img src="docImages/securityGroup.png">
 
 <img src="docImages/storageScreen.png">
+6) Download a copy of Alluxio Community edition and place it in your S3 bucket and make it public.  The script will wget the code from this URL on each node.  If you have a different URL that the script can access to get the bits, that will work also
 
+Now you are ready to modify the launchCluster.sh script so you can configure and deploy the Alluxio software to your instances.  At the top of the file are a few values to modify:  
+```
+MASTER="<MASTER-NODE-NAME>"
+WORKER1="<WORKER1-NODE-NAME>"
+WORKER2="<WORKER2-NODE-NAME>"
+BITS="<URL-FOR-ALLUXIO-BITS>"
+S3_BUCKET="<S3-BUCKET_URL>"
+AWS_CERT_FILE="<LOCAL-CERT-FILE>"
+ACCESS_KEY="<AWS-ACCESS-KEY>"
+AWS_SECRET="<AWS-SECRET>"
+```
 
+Pay close attention to these values to make sure the script runs successfully.
 
+Now you can run the launchCluster.sh script.  Make sure your AWS key file (.pem or .cer file), and all the files in this rep are in the same directory where you execute the script.  You can monitor the output of the script and should see that all the parts execute successfully.
 
+When the script completes, you should be able to ssh into the master node and start Alluxio and run all the sample tests.
